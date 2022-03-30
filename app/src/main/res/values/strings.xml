@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Cultural Heritage</string>
+
+    <string name="biography">Өмірбаяны</string>
+    <string name="empty_string"> </string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <!-- Strings for AcademicAdapter.kt BEGIN -->
+    <string name="bukharzhirau_name">Бұқар Жырау </string>
+    <string name="bukharzhirau_desc">әйгілі жырау, Абылай ханның ақылшы-биі, абыз </string>
+
+    <string name="isaBaizakov_name">Иса Байзақов</string>
+    <string name="isaBaizakov_desc">Ақын, әнші, артист, домбырашы, композитор</string>
+
+    <string name="mashhur_name">Мәшһүр Жүсіп Көпеев</string>
+    <string name="mashhur_desc">ұлы ойшыл, фольклор танушы, этнограф, тарихшы, философ, қазақ мәдениеті мен әдебиетінің белгілі тұлғасы</string>
+
+    <string name="toraigyrov_name">Сұлтанмахмұт Торайғыров</string>
+    <string name="toraigyrov_desc">Қазақтың ақыны, ағартушы-демократы</string>
+
+    <string name="satbayev_name">Қаныш Имантайұлы Сәтбаев</string>
+    <string name="satbayev_desc">Геолог-ғалым, минерология ғылымдарының докторы, профессор, академик</string>
+
+    <string name="bekhozhin_name">Қайыржан Нұрғожаұлы Бекқожин</string>
+    <string name="bekhozhin_desc">Ғалым, педагог, профессор,тарих ғылымдарының докторы, қазақ журналистикасын қалыптастырушылардың бірі</string>
+
+    <string name="aimauytov_name">Жүсіпбек Аймауытов</string>
+    <string name="aimauytov_desc">Драматург, публицист, қазақ әдебиетінің негізін салушылардың бірі</string>
+
+    <string name="bekmakhanov_name">Ермұхан Бекмаханұлы Бекмаханов</string>
+    <string name="bekmakhanov_desc">Қазақ тарихшы ғалым, тарих ғылымдарының докторы, профессор, Қазақ КСР ғылым академиясының корреспондент мүшесі</string>
+
+    <string name="bekturov_name">Әбікен Бектұров</string>
+    <string name="bekturov_desc">Техника ғылымдарының докторы, профессор, Қазақстан Ғылым Академиясының академигі,
+Қазақстанның еңбек сіңірген ғылым қайраткері</string>
+
+    <string name="shezhire_name">"Қазақ шежіресі"</string>
+
+
+    <string name="margulan_name">Әлкей Хақанұлы Марғұлан</string>
+    <string name="margulan_desc">Археолог, тарихшы, этнограф, шығыстанушы, өнертанушы</string>
+    <!-- Strings for AcademicAdapter.kt END -->
+    <string name="toroighyrov_university">Toroighyrov University</string>
+    <string name="read_button">Читать</string>
+    <string name="main_background">Main Background</string>
+</resources>
