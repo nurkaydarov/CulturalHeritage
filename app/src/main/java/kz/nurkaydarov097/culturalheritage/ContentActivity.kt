@@ -1,23 +1,62 @@
 package kz.nurkaydarov097.culturalheritage
 
+import android.app.Service
+import android.content.Context
+
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
+import android.widget.Button
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatDelegate
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
 
 class ContentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
+    //private lateinit var context:Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+
+        /*******Check Internet Connection********/
+        val reloadBtn = findViewById<Button>(R.id.reloadBtn)
+        if(!isConnected()){
+            binding.noInternetContainer.visibility = VISIBLE
+            binding.webView.visibility = INVISIBLE
+        }
+        else{
+
+        }
+
+        reloadBtn.setOnClickListener {
+            if(isConnected()){
+                binding.noInternetContainer.visibility = INVISIBLE
+                binding.webView.visibility = VISIBLE
+                binding.webView.reload()
+            }
+            else{
+                Toast.makeText(this, getString(R.string.noInternetConnection), LENGTH_SHORT).show()
+            }
+        }
+
+
+        /*****************************************/
+
 
         /*****Intent****/
         val intent:Intent = intent
@@ -84,6 +123,8 @@ class ContentActivity : AppCompatActivity() {
             }
         }
 
+
+
     }
 
     override fun onBackPressed() {
@@ -100,6 +141,40 @@ class ContentActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(ID_ACADEMIC, academicID)
+    }
+
+
+    fun isConnected():Boolean{
+
+        var result = false
+       val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            val networkCapabilities = connectivityManager.activeNetwork ?: return false
+            val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities)
+
+            if (actNw != null) {
+                result = when {
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
+                    else -> false
+                }
+            }
+        }
+        else {
+            connectivityManager.run{
+                connectivityManager.activeNetworkInfo?.run{
+                    result = when(type){
+                        ConnectivityManager.TYPE_WIFI -> true
+                        ConnectivityManager.TYPE_MOBILE -> true
+                        ConnectivityManager.TYPE_ETHERNET -> true
+                        else -> false
+                    }
+                }
+            }
+        }
+        return result
     }
 
     companion object{
