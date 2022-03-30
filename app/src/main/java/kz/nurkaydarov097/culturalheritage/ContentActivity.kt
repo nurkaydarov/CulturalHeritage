@@ -16,6 +16,8 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.Toast
+import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatDelegate
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
 
@@ -39,17 +41,17 @@ class ContentActivity : AppCompatActivity() {
         }
         else{
 
+        }
+
+        reloadBtn.setOnClickListener {
             if(isConnected()){
-                reloadBtn.setOnClickListener {
-                    binding.noInternetContainer.visibility = INVISIBLE
-                    binding.webView.visibility = VISIBLE
-                    binding.webView.reload()
-
-
-                }
+                binding.noInternetContainer.visibility = INVISIBLE
+                binding.webView.visibility = VISIBLE
+                binding.webView.reload()
             }
-
-
+            else{
+                Toast.makeText(this, getString(R.string.noInternetConnection), LENGTH_SHORT).show()
+            }
         }
 
 
