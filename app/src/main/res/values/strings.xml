@@ -45,6 +45,6 @@
     <string name="toroighyrov_university">Toroighyrov University</string>
     <string name="read_button">Читать</string>
     <string name="main_background">Main Background</string>
-    <string name="noInternetConnection">Не подключения к интернету :(</string>
+    <string name="noInternetConnection">Нет подключения к интернету :(</string>
     <string name="reload">Перезагрузить</string>
 </resources>
