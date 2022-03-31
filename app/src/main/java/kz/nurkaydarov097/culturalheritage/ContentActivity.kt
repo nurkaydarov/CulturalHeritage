@@ -201,40 +201,51 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             }
 
             R.id.IsaBayzakov_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.isaBaizakov_link))
             }
             R.id.mashhur_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.mashhur_link))
             }
             R.id.toraighyrov_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.toraigyrov_link))
             }
             R.id.satbayev_item -> {
-
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.satbayev_link))
             }
             R.id.bekhozhin_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.bekhozhin_link))
             }
             R.id.aimauytov_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.aimauytov_link))
             }
             R.id.bekmakhanov_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.bekmakhanov_link))
             }
             R.id.bekturov_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.bekturov_link))
             }
             R.id.margulan_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.margulan_link))
             }
             R.id.shezhire_item -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.shezhire_link))
             }
             else -> {
+                binding.webView.clearHistory()
                 binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
             }
         }
+        binding.webView.clearHistory()
         binding.drawerLayout.closeDrawers()
         return false
     }
@@ -278,6 +289,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onDestroy() {
+        binding.webView.clearCache(true)
         binding.webView.destroy()
         super.onDestroy()
     }
