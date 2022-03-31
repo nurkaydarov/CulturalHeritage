@@ -101,25 +101,25 @@ class ContentActivity : AppCompatActivity() {
                 binding.webView.loadUrl("https://satpaev.tou.edu.kz/")
             }
             5 -> {
-                binding.webView.loadUrl("https://satpaev.tou.edu.kz/")
-            }
-            6 -> {
                 binding.webView.loadUrl("https://bekhozhin.tou.edu.kz/")
             }
-            7 -> {
+            6 -> {
                 binding.webView.loadUrl("https://aimauytov.tou.edu.kz/")
             }
-            8 -> {
+            7 -> {
                 binding.webView.loadUrl("https://bekmakhanov.tou.edu.kz/")
             }
-            9 -> {
+            8 -> {
                 binding.webView.loadUrl("https://bekturov.tou.edu.kz/")
+            }
+            9 -> {
+                binding.webView.loadUrl("https://margulan.tou.edu.kz/")
             }
             10 -> {
                 binding.webView.loadUrl("https://shezhyre.tou.edu.kz/")
             }
             else -> {
-                binding.webView.loadUrl("https://margulan.tou.edu.kz/")
+                binding.webView.loadUrl("https://bukharzhirau.tou.edu.kz/")
             }
         }
 

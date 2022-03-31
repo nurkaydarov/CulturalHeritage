@@ -10,41 +10,57 @@
     <!-- Strings for AcademicAdapter.kt BEGIN -->
     <string name="bukharzhirau_name">Бұқар Жырау </string>
     <string name="bukharzhirau_desc">әйгілі жырау, Абылай ханның ақылшы-биі, абыз </string>
+    <string name="bukharzhirau_link">https://bukharzhirau.tou.edu.kz/</string>
 
     <string name="isaBaizakov_name">Иса Байзақов</string>
     <string name="isaBaizakov_desc">Ақын, әнші, артист, домбырашы, композитор</string>
+    <string name="isaBaizakov_link">https://isa-baizakov.tou.edu.kz/</string>
 
     <string name="mashhur_name">Мәшһүр Жүсіп Көпеев</string>
     <string name="mashhur_desc">ұлы ойшыл, фольклор танушы, этнограф, тарихшы, философ, қазақ мәдениеті мен әдебиетінің белгілі тұлғасы</string>
+    <string name="mashhur_link">https://mashhur.tou.edu.kz/</string>
 
     <string name="toraigyrov_name">Сұлтанмахмұт Торайғыров</string>
     <string name="toraigyrov_desc">Қазақтың ақыны, ағартушы-демократы</string>
+    <string name="toraigyrov_link">https://toraigyrov.tou.edu.kz/</string>
 
     <string name="satbayev_name">Қаныш Имантайұлы Сәтбаев</string>
     <string name="satbayev_desc">Геолог-ғалым, минерология ғылымдарының докторы, профессор, академик</string>
+    <string name="satbayev_link">https://satpaev.tou.edu.kz/</string>
 
     <string name="bekhozhin_name">Қайыржан Нұрғожаұлы Бекқожин</string>
     <string name="bekhozhin_desc">Ғалым, педагог, профессор,тарих ғылымдарының докторы, қазақ журналистикасын қалыптастырушылардың бірі</string>
+    <string name="bekhozhin_link">https://bekhozhin.tou.edu.kz/</string>
 
     <string name="aimauytov_name">Жүсіпбек Аймауытов</string>
     <string name="aimauytov_desc">Драматург, публицист, қазақ әдебиетінің негізін салушылардың бірі</string>
+    <string name="aimauytov_link">https://aimauytov.tou.edu.kz/</string>
 
     <string name="bekmakhanov_name">Ермұхан Бекмаханұлы Бекмаханов</string>
     <string name="bekmakhanov_desc">Қазақ тарихшы ғалым, тарих ғылымдарының докторы, профессор, Қазақ КСР ғылым академиясының корреспондент мүшесі</string>
+    <string name="bekmakhanov_link">https://bekmakhanov.tou.edu.kz/</string>
 
     <string name="bekturov_name">Әбікен Бектұров</string>
     <string name="bekturov_desc">Техника ғылымдарының докторы, профессор, Қазақстан Ғылым Академиясының академигі,
 Қазақстанның еңбек сіңірген ғылым қайраткері</string>
+    <string name="bekturov_link">https://bekturov.tou.edu.kz/</string>
 
-    <string name="shezhire_name">"Қазақ шежіресі"</string>
+
 
 
     <string name="margulan_name">Әлкей Хақанұлы Марғұлан</string>
     <string name="margulan_desc">Археолог, тарихшы, этнограф, шығыстанушы, өнертанушы</string>
+    <string name="margulan_link">https://margulan.tou.edu.kz/</string>
+
+    <string name="shezhire_name">Қазақ шежіресі</string>
+    <string name="shezhire_link">https://shezhyre.tou.edu.kz/</string>
     <!-- Strings for AcademicAdapter.kt END -->
     <string name="toroighyrov_university">Toroighyrov University</string>
     <string name="read_button">Читать</string>
     <string name="main_background">Main Background</string>
     <string name="noInternetConnection">Нет подключения к интернету :(</string>
     <string name="reload">Перезагрузить</string>
+    <string name="menu">Menu</string>
+    <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
+
 </resources>
