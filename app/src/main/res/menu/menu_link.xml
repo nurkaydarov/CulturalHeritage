@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="@string/menu">
+        <menu>
+            <item
+                android:id="@+id/home_item"
+                android:title="@string/to_home"
+                />
+            <item
+                android:id="@+id/bukharzhirau_item"
+                android:title="@string/bukharzhirau_name" />
+
+            <item
+                android:id="@+id/IsaBayzakov_item"
+                android:title="@string/isaBaizakov_name" />
+            <item
+                android:id="@+id/mashhur_item"
+                android:title="@string/mashhur_name"/>
+            <item
+                android:id="@+id/toraighyrov_item"
+                android:title="@string/toraigyrov_name" />
+            <item
+                android:id="@+id/satbayev_item"
+                android:title="@string/satbayev_name" />
+            <item
+                android:id="@+id/bekhozhin_item"
+                android:title="@string/bekhozhin_name" />
+            <item
+                android:id="@+id/aimauytov_item"
+                android:title="Жүсіпбек Аймауытов" />
+            <item
+                android:id="@+id/bekmakhanov_item"
+                android:title="@string/bekmakhanov_name" />
+            <item
+                android:id="@+id/bekturov_item"
+                android:title="@string/bekturov_name" />
+            <item
+                android:id="@+id/margulan_item"
+                android:title="@string/margulan_name" />
+            <item
+                android:id="@+id/shezhire_item"
+                android:title="@string/shezhire_name" />
+        </menu>
+    </item>
+</menu>

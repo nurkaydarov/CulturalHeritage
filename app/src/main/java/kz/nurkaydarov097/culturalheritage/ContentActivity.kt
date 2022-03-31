@@ -11,17 +11,24 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.navigation.NavigationView
+import kz.nurkaydarov097.culturalheritage.adapters.AcademicAdapter
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
 
-class ContentActivity : AppCompatActivity() {
+class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
     //private lateinit var context:Context
@@ -32,6 +39,10 @@ class ContentActivity : AppCompatActivity() {
         setContentView(binding.root)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
+        /*****Intent****/
+        val intent:Intent = intent
+        academicID = intent.getIntExtra(ID_ACADEMIC, 0)
+        /**************/
 
         /*******Check Internet Connection********/
         val reloadBtn = findViewById<Button>(R.id.reloadBtn)
@@ -58,10 +69,16 @@ class ContentActivity : AppCompatActivity() {
         /*****************************************/
 
 
-        /*****Intent****/
-        val intent:Intent = intent
-        academicID = intent.getIntExtra(ID_ACADEMIC, 0)
-        /**************/
+        /************Drawer Layout************************/
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawerLayout)
+        val navView = findViewById<NavigationView>(R.id.nav_view)
+        navView.setNavigationItemSelectedListener(this)
+
+
+
+        /********************************/
+
+
 
         /******WebView******/
         binding.webView.loadUrl("https://dot.tou.edu.kz")
@@ -81,7 +98,7 @@ class ContentActivity : AppCompatActivity() {
            false
 
         })
-        /******************/
+
 
 
         when(academicID){
@@ -123,6 +140,33 @@ class ContentActivity : AppCompatActivity() {
             }
         }
 
+        /*******WebView End***********/
+
+
+        /*
+        /**********Bottom sheet menu*******************/
+
+        // получение вью нижнего экрана
+        val lBottomSheet: LinearLayout = findViewById(R.id.bottom_sheet) as LinearLayout
+
+        // настройка поведения нижнего экрана
+        val bottomSheetBehavior = BottomSheetBehavior.from(lBottomSheet)
+        // настройка состояний нижнего экрана
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
+
+        // настройка максимальной высоты
+        bottomSheetBehavior.setPeekHeight(340);
+
+        bottomSheetBehavior.setHideable(true);
+        /*****************Bottom sheet menu END******************************/
+        */
+
+        /****************Floating Button*************************/
+        binding.menuButton.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        /*****************Floating Button END******************************/
 
 
     }
@@ -143,42 +187,105 @@ class ContentActivity : AppCompatActivity() {
         outState.putInt(ID_ACADEMIC, academicID)
     }
 
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.home_item -> {
+                val intent = Intent(this, MainActivity::class.java)
+                //intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
+                finish()
+                this.startActivity(intent)
 
-    fun isConnected():Boolean{
+            }
+            R.id.bukharzhirau_item -> {
+                binding.webView.clearHistory()
+                binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
+            }
 
-        var result = false
-       val connectivityManager = applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            R.id.IsaBayzakov_item -> {
+                binding.webView.loadUrl(getString(R.string.isaBaizakov_link))
+            }
+            R.id.mashhur_item -> {
+                binding.webView.loadUrl(getString(R.string.mashhur_link))
+            }
+            R.id.toraighyrov_item -> {
+                binding.webView.loadUrl(getString(R.string.toraigyrov_link))
+            }
+            R.id.satbayev_item -> {
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            val networkCapabilities = connectivityManager.activeNetwork ?: return false
-            val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities)
-
-            if (actNw != null) {
-                result = when {
-                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
-                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
-                    actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
-                    else -> false
-                }
+                binding.webView.loadUrl(getString(R.string.satbayev_link))
+            }
+            R.id.bekhozhin_item -> {
+                binding.webView.loadUrl(getString(R.string.bekhozhin_name))
+            }
+            R.id.aimauytov_item -> {
+                binding.webView.loadUrl(getString(R.string.aimauytov_link))
+            }
+            R.id.bekmakhanov_item -> {
+                binding.webView.loadUrl(getString(R.string.bekmakhanov_link))
+            }
+            R.id.bekturov_item -> {
+                binding.webView.loadUrl(getString(R.string.bekturov_link))
+            }
+            R.id.margulan_item -> {
+                binding.webView.loadUrl(getString(R.string.margulan_link))
+            }
+            R.id.shezhire_item -> {
+                binding.webView.loadUrl(getString(R.string.shezhire_link))
+            }
+            else -> {
+                binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
             }
         }
-        else {
-            connectivityManager.run{
-                connectivityManager.activeNetworkInfo?.run{
-                    result = when(type){
-                        ConnectivityManager.TYPE_WIFI -> true
-                        ConnectivityManager.TYPE_MOBILE -> true
-                        ConnectivityManager.TYPE_ETHERNET -> true
+        binding.drawerLayout.closeDrawers()
+        return false
+    }
+
+        fun isConnected(): Boolean {
+
+            var result = false
+            val connectivityManager =
+                applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                val networkCapabilities = connectivityManager.activeNetwork ?: return false
+                val actNw = connectivityManager.getNetworkCapabilities(networkCapabilities)
+
+                if (actNw != null) {
+                    result = when {
+                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                        actNw.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> true
                         else -> false
                     }
                 }
+            } else {
+                connectivityManager.run {
+                    connectivityManager.activeNetworkInfo?.run {
+                        result = when (type) {
+                            ConnectivityManager.TYPE_WIFI -> true
+                            ConnectivityManager.TYPE_MOBILE -> true
+                            ConnectivityManager.TYPE_ETHERNET -> true
+                            else -> false
+                        }
+                    }
+                }
             }
+            return result
         }
-        return result
+
+    override fun onStop() {
+        binding.webView.destroy()
+        super.onStop()
     }
 
-    companion object{
-        @JvmStatic
-        val ID_ACADEMIC = "ID_ACADEMIC"
+    override fun onDestroy() {
+        binding.webView.destroy()
+        super.onDestroy()
     }
+
+        companion object {
+            @JvmStatic
+            val ID_ACADEMIC = "ID_ACADEMIC"
+        }
+
 }
