@@ -191,10 +191,9 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         when (item.itemId) {
             R.id.home_item -> {
                 val intent = Intent(this, MainActivity::class.java)
-                //intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
-                finish()
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 this.startActivity(intent)
-
+                finish()
             }
             R.id.bukharzhirau_item -> {
                 binding.webView.clearHistory()
@@ -215,7 +214,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 binding.webView.loadUrl(getString(R.string.satbayev_link))
             }
             R.id.bekhozhin_item -> {
-                binding.webView.loadUrl(getString(R.string.bekhozhin_name))
+                binding.webView.loadUrl(getString(R.string.bekhozhin_link))
             }
             R.id.aimauytov_item -> {
                 binding.webView.loadUrl(getString(R.string.aimauytov_link))
@@ -274,7 +273,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         }
 
     override fun onStop() {
-        binding.webView.destroy()
+
         super.onStop()
     }
 
