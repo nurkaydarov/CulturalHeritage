@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Context
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
@@ -16,10 +17,14 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -31,7 +36,11 @@ import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
 class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
+
+    private var loadingFinished:Boolean = true
+    private var redirect:Boolean = false
     //private lateinit var context:Context
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,8 +58,12 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         if(!isConnected()){
             binding.noInternetContainer.visibility = VISIBLE
             binding.webView.visibility = INVISIBLE
+            binding.menuButton.visibility = INVISIBLE
         }
         else{
+            binding.noInternetContainer.visibility = INVISIBLE
+            binding.webView.visibility = VISIBLE
+            binding.menuButton.visibility = VISIBLE
 
         }
 
@@ -58,6 +71,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             if(isConnected()){
                 binding.noInternetContainer.visibility = INVISIBLE
                 binding.webView.visibility = VISIBLE
+                binding.menuButton.visibility = VISIBLE
                 binding.webView.reload()
             }
             else{
@@ -85,6 +99,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val webViewSetting = binding.webView.settings
         webViewSetting.javaScriptEnabled = true
         binding.webView.canGoBack()
+
         binding.webView.setOnKeyListener(View.OnKeyListener{ v, keyCode, event ->
 
             if( keyCode == KeyEvent.KEYCODE_BACK
@@ -98,9 +113,93 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
            false
 
         })
+        if(isConnected())
+        {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.webView.webViewClient = object: WebViewClient(){
+                override fun shouldOverrideUrlLoading(
+                    webView: WebView?,
+                    request: WebResourceRequest?
+                ): Boolean {
+                    if(!loadingFinished){
+                        redirect = true
+                    }
+
+                    loadingFinished = true
+                    if (webView != null) {
+                        if (request != null) {
+                            webView.loadUrl(request.url.toString())
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        else {
+            binding.webView.webViewClient = object: WebViewClient(){
+                override fun shouldOverrideUrlLoading(webView: WebView?, url: String?): Boolean {
+                    if(isConnected()){
+                    if(!loadingFinished){
+                        redirect = true
+                    }
 
 
 
+
+                    loadingFinished = true
+
+                    if (webView != null) {
+                        if (url != null) {
+
+                            if(isConnected()){
+                                webView.loadUrl(url)
+                            }
+                            else{
+                                binding.noInternetContainer.visibility = VISIBLE
+                                binding.webView.visibility = INVISIBLE
+                                binding.menuButton.visibility = INVISIBLE
+                            }
+
+                        }
+                    }
+                    }
+                    return true
+                }
+            }
+        }
+
+
+        binding.webView.webViewClient = object: WebViewClient(){
+            override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
+                super.onPageStarted(view, url, favicon)
+                loadingFinished = false
+                binding.loadingBlock.visibility = VISIBLE
+                binding.webView.visibility = INVISIBLE
+                binding.menuButton.visibility = INVISIBLE
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                if(!redirect){
+                    loadingFinished = true
+                    binding.loadingBlock.visibility = INVISIBLE
+                    binding.webView.visibility = VISIBLE
+                    binding.menuButton.visibility = VISIBLE
+                }
+                else{
+                    redirect = false
+                }
+            }
+        }
+        }
+
+
+
+
+        if(isConnected())
+        {
+
+        }
         when(academicID){
             0 -> {
                 binding.webView.loadUrl("https://bukharzhirau.tou.edu.kz/")
@@ -188,62 +287,69 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home_item -> {
-                val intent = Intent(this, MainActivity::class.java)
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                this.startActivity(intent)
-                finish()
-            }
-            R.id.bukharzhirau_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
-            }
+        if(isConnected()) {
+            when (item.itemId) {
+                R.id.home_item -> {
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    this.startActivity(intent)
+                    finish()
+                }
+                R.id.bukharzhirau_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
+                }
 
-            R.id.IsaBayzakov_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.isaBaizakov_link))
+                R.id.IsaBayzakov_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.isaBaizakov_link))
+                }
+                R.id.mashhur_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.mashhur_link))
+                }
+                R.id.toraighyrov_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.toraigyrov_link))
+                }
+                R.id.satbayev_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.satbayev_link))
+                }
+                R.id.bekhozhin_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.bekhozhin_link))
+                }
+                R.id.aimauytov_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.aimauytov_link))
+                }
+                R.id.bekmakhanov_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.bekmakhanov_link))
+                }
+                R.id.bekturov_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.bekturov_link))
+                }
+                R.id.margulan_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.margulan_link))
+                }
+                R.id.shezhire_item -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.shezhire_link))
+                }
+                else -> {
+                    binding.webView.clearHistory()
+                    binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
+                }
             }
-            R.id.mashhur_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.mashhur_link))
-            }
-            R.id.toraighyrov_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.toraigyrov_link))
-            }
-            R.id.satbayev_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.satbayev_link))
-            }
-            R.id.bekhozhin_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.bekhozhin_link))
-            }
-            R.id.aimauytov_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.aimauytov_link))
-            }
-            R.id.bekmakhanov_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.bekmakhanov_link))
-            }
-            R.id.bekturov_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.bekturov_link))
-            }
-            R.id.margulan_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.margulan_link))
-            }
-            R.id.shezhire_item -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.shezhire_link))
-            }
-            else -> {
-                binding.webView.clearHistory()
-                binding.webView.loadUrl(getString(R.string.bukharzhirau_link))
-            }
+        }
+        else{
+            binding.noInternetContainer.visibility = VISIBLE
+            binding.webView.visibility = INVISIBLE
+            binding.menuButton.visibility = INVISIBLE
         }
         binding.webView.clearHistory()
         binding.drawerLayout.closeDrawers()
@@ -287,6 +393,8 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
         super.onStop()
     }
+
+
 
     override fun onDestroy() {
         binding.webView.clearCache(true)
