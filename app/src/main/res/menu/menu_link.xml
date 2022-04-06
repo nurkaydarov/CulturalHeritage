@@ -27,7 +27,7 @@
                 android:title="@string/bekhozhin_name" />
             <item
                 android:id="@+id/aimauytov_item"
-                android:title="Жүсіпбек Аймауытов" />
+                android:title="@string/aimauytov_name" />
             <item
                 android:id="@+id/bekmakhanov_item"
                 android:title="@string/bekmakhanov_name" />
