@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Cultural Heritage</string>
+    <string name="app_name">Қазақстанның мәдени мұралары</string>
 
     <string name="biography">Өмірбаяны</string>
     <string name="empty_string"> </string>
@@ -58,9 +58,9 @@
     <string name="toroighyrov_university">Toroighyrov University</string>
     <string name="read_button">Толығырақ</string>
     <string name="main_background">Main Background</string>
-    <string name="noInternetConnection">Нет подключения к интернету :(</string>
-    <string name="reload">Перезагрузить</string>
-    <string name="menu">Menu</string>
+    <string name="noInternetConnection">Ғаламтормен байланыс жоқ :(</string>
+    <string name="reload">Бетті қайта жүктеу</string>
+    <string name="menu">Мәзір</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string name="to_home">Басты бет</string>
 
