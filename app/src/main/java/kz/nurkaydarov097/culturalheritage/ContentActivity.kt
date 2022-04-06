@@ -33,7 +33,7 @@ import com.google.android.material.navigation.NavigationView
 import kz.nurkaydarov097.culturalheritage.adapters.AcademicAdapter
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
 
-class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
 
@@ -99,6 +99,13 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         val webViewSetting = binding.webView.settings
         webViewSetting.javaScriptEnabled = true
         binding.webView.canGoBack()
+
+
+       /* binding.webView.setOnTouchListener(object: OnSwipeTouchListener(this){
+            override fun onSwipeTop(){
+                binding.webView.reload()
+            }
+        })*/
 
         binding.webView.setOnKeyListener(View.OnKeyListener{ v, keyCode, event ->
 
