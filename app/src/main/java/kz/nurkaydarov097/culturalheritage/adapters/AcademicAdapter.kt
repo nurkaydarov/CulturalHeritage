@@ -15,7 +15,7 @@ import kz.nurkaydarov097.culturalheritage.MainActivity
 import kz.nurkaydarov097.culturalheritage.R
 import kz.nurkaydarov097.culturalheritage.models.Academic
 
-class AcademicAdapter(val context:Context, private val dataset:List<Academic>) : RecyclerView.Adapter<AcademicAdapter.AcademicItemViewHolder>()
+class AcademicAdapter(val context:Context, private val dataset:List<Academic>, private val langID:String) : RecyclerView.Adapter<AcademicAdapter.AcademicItemViewHolder>()
 {
     inner class AcademicItemViewHolder(private val view: View):RecyclerView.ViewHolder(view){
         val imageView: ImageView = view.findViewById<ImageView>(R.id.academic_home_image)
@@ -39,6 +39,7 @@ class AcademicAdapter(val context:Context, private val dataset:List<Academic>) :
             val intent = Intent(context, ContentActivity::class.java)
             //intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra(ID_ACADEMIC, item.id)
+            intent.putExtra(LANGUAGE_ID, langID)
             context.startActivity(intent)
         }
     }
@@ -49,5 +50,6 @@ class AcademicAdapter(val context:Context, private val dataset:List<Academic>) :
 
     companion object{
         @JvmStatic val ID_ACADEMIC = "ID_ACADEMIC"
+        @JvmStatic val LANGUAGE_ID = "LANGUAGE_ID"
     }
 }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Cultural heritage of Kazakhstan</string>
+
+    <string name="biography">Өмірбаяны</string>
+    <string name="empty_string"> </string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <!-- Strings for AcademicAdapter.kt BEGIN -->
+    <string name="bukharzhirau_name">Bukhar Zhyrau </string>
+    <string name="bukharzhirau_desc">The famous zhyrau, the wise Bi of Abylai Khan, the abyz </string>
+    <string name="bukharzhirau_link">https://bukharzhirau.tou.edu.kz/</string>
+
+    <string name="isaBaizakov_name">Isa Baizakov</string>
+    <string name="isaBaizakov_desc">Poet, singer, artist, dombrist, composer</string>
+    <string name="isaBaizakov_link">https://isa-baizakov.tou.edu.kz/</string>
+
+    <string name="mashhur_name">Mashkhur Zhusup Kopeev</string>
+    <string name="mashhur_desc">Great thinker, connoisseur of folklore, ethnographer, historian, philosopher, famous figure of Kazakh culture and literature</string>
+    <string name="mashhur_link">https://mashhur.tou.edu.kz/</string>
+
+    <string name="toraigyrov_name">Sultanmakhmut Toraigyrov</string>
+    <string name="toraigyrov_desc">Kazakh poet, educator-Democrat</string>
+    <string name="toraigyrov_link">https://toraigyrov.tou.edu.kz/</string>
+
+    <string name="satbayev_name">Kanysh Satpayev</string>
+    <string name="satbayev_desc">Geologist, doctor of mineralogical sciences, professor, academician</string>
+    <string name="satbayev_link">https://satpaev.tou.edu.kz/</string>
+
+    <string name="bekhozhin_name">Kairzhan Bekkozhin</string>
+    <string name="bekhozhin_desc">Scientist, teacher, Professor, Doctor of historical sciences, one of the founders of Kazakh journalism</string>
+    <string name="bekhozhin_link">https://bekhozhin.tou.edu.kz/</string>
+
+    <string name="aimauytov_name">Zhusupbek Aimautov</string>
+    <string name="aimauytov_desc">Playwright, publicist, one of the founders of Kazakh literature</string>
+    <string name="aimauytov_link">https://aimauytov.tou.edu.kz/</string>
+
+    <string name="bekmakhanov_name">Yermukhan Bekmakhanov</string>
+    <string name="bekmakhanov_desc">Kazakh historian, doctor of historical sciences, professor, corresponding member of the Academy of Sciences of the Kazakh SSR</string>
+    <string name="bekmakhanov_link">https://bekmakhanov.tou.edu.kz/</string>
+
+    <string name="bekturov_name">Abiken Bekturov</string>
+    <string name="bekturov_desc">Doctor of technical sciences, professor, academician of the Academy of Sciences of Kazakhstan,
+Honored scientist of Kazakhstan</string>
+    <string name="bekturov_link">https://bekturov.tou.edu.kz/</string>
+
+
+
+
+    <string name="margulan_name">Alkey Margulan</string>
+    <string name="margulan_desc">Archaeologist, historian, ethnographer, Orientalist, art critic</string>
+    <string name="margulan_link">https://margulan.tou.edu.kz/</string>
+
+    <string name="shezhire_name">Kazakh Chronicle</string>
+    <string name="shezhire_link">https://shezhyre.tou.edu.kz/</string>
+    <!-- Strings for AcademicAdapter.kt END -->
+    <string name="toroighyrov_university">Toroighyrov University</string>
+    <string name="read_button">More detailed</string>
+    <string name="main_background">Main Background</string>
+    <string name="noInternetConnection">No internet connection :(</string>
+    <string name="reload">Reload</string>
+    <string name="menu">Menu</string>
+    <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
+    <string name="to_home">Home page</string>
+
+
+    <string name="language_kz">Kazakh</string>
+    <string name="language_ru">Russian</string>
+    <string name="language_en">English</string>
+</resources>

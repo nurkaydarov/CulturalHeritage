@@ -19,4 +19,6 @@ class Datasource {
             Academic(10,R.string.shezhire_name,R.string.empty_string,R.mipmap.shezhire),
         )
     }
+
+
 }
