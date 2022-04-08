@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Қазақстанның мәдени мұралары</string>
 
@@ -6,6 +7,9 @@
 
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+
+
+
 
     <!-- Strings for AcademicAdapter.kt BEGIN -->
     <string name="bukharzhirau_name">Бұқар Жырау </string>
@@ -63,9 +67,8 @@
     <string name="menu">Мәзір</string>
     <string name="bottom_sheet_behavior" translatable="false">com.google.android.material.bottomsheet.BottomSheetBehavior</string>
     <string name="to_home">Басты бет</string>
+
     <string name="language_kz">Қазақша</string>
     <string name="language_ru">Орысша</string>
     <string name="language_en">Ағылшынша</string>
-
-
 </resources>

@@ -11,6 +11,7 @@ import android.net.NetworkInfo
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
 import android.view.MotionEvent
@@ -32,10 +33,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
 import kz.nurkaydarov097.culturalheritage.adapters.AcademicAdapter
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
+import kz.nurkaydarov097.culturalheritage.utils.ChangeLanguage
 
 class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
+    private var langID:String = "kk"
 
     private var loadingFinished:Boolean = true
     private var redirect:Boolean = false
@@ -51,6 +54,10 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         /*****Intent****/
         val intent:Intent = intent
         academicID = intent.getIntExtra(ID_ACADEMIC, 0)
+        langID = intent.getStringExtra(LANGUAGE_ID).toString()
+
+        Log.d("LANG", "A " + langID)
+        ChangeLanguage(this).changeLanguage(langID)
         /**************/
 
         /*******Check Internet Connection********/
@@ -291,6 +298,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(ID_ACADEMIC, academicID)
+        outState.putString(LANGUAGE_ID, langID)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -299,6 +307,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 R.id.home_item -> {
                     val intent = Intent(this, MainActivity::class.java)
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra(LANGUAGE_ID, langID)
                     this.startActivity(intent)
                     finish()
                 }
@@ -412,6 +421,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         companion object {
             @JvmStatic
             val ID_ACADEMIC = "ID_ACADEMIC"
+            val  LANGUAGE_ID = "LANGUAGE_ID"
         }
 
 }
