@@ -20,21 +20,5 @@ class Datasource {
         )
     }
 
-    fun loadMenuLinks():List<MenuLink>{
-        return listOf(
 
-            MenuLink(0, R.string.bukharzhirau_name, R.string.bukharzhirau_link, R.mipmap.bukharzhirau),
-            MenuLink(1, R.string.isaBaizakov_name, R.string.isaBaizakov_link, R.mipmap.bayzakov),
-            MenuLink(2, R.string.mashhur_name, R.string.mashhur_link,R.mipmap.mashhur),
-            MenuLink(3, R.string.toraigyrov_name, R.string.toraigyrov_link,R.mipmap.toraighyrov),
-            MenuLink(4, R.string.satbayev_name, R.string.satbayev_link,R.mipmap.satbayev),
-            MenuLink(5, R.string.bekhozhin_name, R.string.bekhozhin_link,R.mipmap.bekhozhin),
-            MenuLink(6, R.string.aimauytov_name, R.string.aimauytov_link,R.mipmap.bekmakhanov),
-            MenuLink(7, R.string.bekmakhanov_name, R.string.bekmakhanov_link,R.mipmap.bekmakhanov),
-            MenuLink(8, R.string.bekturov_name, R.string.bekturov_link,R.mipmap.bekturov),
-            MenuLink(9, R.string.margulan_name, R.string.margulan_link,R.mipmap.margulan),
-            MenuLink(10, R.string.shezhire_name, R.string.shezhire_link,R.mipmap.shezhire),
-
-        )
-    }
 }
