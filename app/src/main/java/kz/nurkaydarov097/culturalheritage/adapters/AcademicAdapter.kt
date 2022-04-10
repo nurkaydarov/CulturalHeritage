@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import kz.nurkaydarov097.culturalheritage.BaseActivity
 import kz.nurkaydarov097.culturalheritage.ContentActivity
 import kz.nurkaydarov097.culturalheritage.MainActivity
 import kz.nurkaydarov097.culturalheritage.R
@@ -41,7 +42,7 @@ class AcademicAdapter(val context:Context, private val dataset:List<Academic>, p
             //intent.addFlags(FLAG_ACTIVITY_NEW_TASK)
             intent.putExtra(ID_ACADEMIC, item.id)
             intent.putExtra(LANGUAGE_ID, langID)
-            ChangeLanguage(context).changeLanguage(langID)
+            //ChangeLanguage(context).changeLanguage(langID)
 
             context.startActivity(intent)
 

@@ -31,7 +31,7 @@ import java.util.*
 class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
-    private var langID:String = "kk"
+   private var langID:String = ""
     private var context:Context = this
     private var loadingFinished:Boolean = true
     private var redirect:Boolean = false
@@ -49,7 +49,8 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
         /*****Intent****/
         val intent:Intent = intent
         academicID = intent.getIntExtra(ID_ACADEMIC, 0)
-        //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+        langID = intent.getStringExtra(LANGUAGE_ID).toString()
+        Locale.setDefault(Locale(langID))
         //ChangeLanguage(this).changeLanguage(langID)
         //ChangeLanguage(this).changeLanguage("kk")
 
@@ -151,7 +152,7 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
                     if (webView != null) {
                         if (request != null) {
                             webView.loadUrl(request.url.toString())
-                            langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                            //langID = intent.getStringExtra(LANGUAGE_ID).toString()
                            // ChangeLanguage(context).changeLanguage("kk")
                             Log.d("FIRST", "shouldOverrideUrlLoading " + Locale.getDefault().language)
                         }
@@ -199,7 +200,7 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
                 binding.webView.visibility = INVISIBLE
                 binding.menuButton.visibility = INVISIBLE
 
-                langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                //langID = intent.getStringExtra(LANGUAGE_ID).toString()
                // ChangeLanguage(context).changeLanguage("kk")
                 Log.d("FIRST", "onPageStarted " + Locale.getDefault().language)
             }
@@ -212,7 +213,7 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
                     binding.webView.visibility = VISIBLE
                     binding.menuButton.visibility = VISIBLE
 
-                    langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                    //langID = intent.getStringExtra(LANGUAGE_ID).toString()
                     //ChangeLanguage(context).changeLanguage("kk")
                     Log.d("FIRST", "onPageFinished " + Locale.getDefault().language)
                 }
@@ -233,7 +234,7 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
         when(academicID){
             0 -> {
                 binding.webView.loadUrl("https://bukharzhirau.tou.edu.kz/")
-                langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                //langID = intent.getStringExtra(LANGUAGE_ID).toString()
                // ChangeLanguage(this).changeLanguage(langID)
             }
             1 -> {
@@ -325,7 +326,7 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(ID_ACADEMIC, academicID)
-        outState.putString(LANGUAGE_ID, langID)
+        //outState.putString(LANGUAGE_ID, langID)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -333,9 +334,9 @@ class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedL
             when (item.itemId) {
                 R.id.home_item -> {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     //intent.putExtra(LANGUAGE_ID, langID)
-                    this.startActivity(intent)
+                    //this.startActivity(intent)
                     finish()
                 }
                 R.id.bukharzhirau_item -> {

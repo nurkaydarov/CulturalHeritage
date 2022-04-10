@@ -14,6 +14,7 @@ import java.util.*
 
 class MainActivity : BaseActivity() {
     private lateinit var binding:ActivityMainBinding
+
     private var langID:String = Locale.getDefault().language
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,8 +25,8 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        initRecyclerView("")
+        langID = Locale.getDefault().language
+        initRecyclerView(langID)
 
         Log.d("LANG", "Locale " +Locale.getDefault().language)
 
@@ -38,6 +39,11 @@ class MainActivity : BaseActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putString(LANGUAGE_ID, langID)
         super.onSaveInstanceState(outState)
+
+    }
+
+    override fun updateLocale(locale: Locale) {
+        super.updateLocale(locale)
 
     }
 
@@ -56,11 +62,11 @@ class MainActivity : BaseActivity() {
                     when(language.itemId){
                          R.id.select_language_kz -> {
 
-                             updateLocale(Locale("kk"))
+                             updateLocale(Locale("kk","kz"))
 
                          }
                          R.id.select_language_ru -> {
-                             updateLocale(Locale("ru"))
+                             updateLocale(Locale("ru", "kz"))
                             // LocaleHelper().setLocale(this@MainActivity, "ru")
                             // val intent = Intent(this, MainActivity::class.java)
                             // intent.putExtra(LANGUAGE_ID, "ru")
