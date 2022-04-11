@@ -1,15 +1,12 @@
 package kz.nurkaydarov097.culturalheritage
 
-import android.app.Service
 import android.content.Context
 
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -22,24 +19,20 @@ import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.navigation.NavigationView
-import kz.nurkaydarov097.culturalheritage.adapters.AcademicAdapter
 import kz.nurkaydarov097.culturalheritage.databinding.ActivityContentBinding
-import kz.nurkaydarov097.culturalheritage.utils.ChangeLanguage
+import java.util.*
 
-class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class ContentActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var binding: ActivityContentBinding
     private var academicID:Int = 0
-    private var langID:String = "kk"
-
+   private var langID:String = ""
+    private var context:Context = this
     private var loadingFinished:Boolean = true
     private var redirect:Boolean = false
     //private lateinit var context:Context
@@ -47,17 +40,33 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityContentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         /*****Intent****/
         val intent:Intent = intent
         academicID = intent.getIntExtra(ID_ACADEMIC, 0)
         langID = intent.getStringExtra(LANGUAGE_ID).toString()
+        Locale.setDefault(Locale(langID))
+        //ChangeLanguage(this).changeLanguage(langID)
+        //ChangeLanguage(this).changeLanguage("kk")
 
-        Log.d("LANG", "A " + langID)
-        ChangeLanguage(this).changeLanguage(langID)
+
+        if(intent.getStringExtra(LANGUAGE_ID) != null){
+           // langID = intent.getStringExtra(LANGUAGE_ID).toString()
+            //ChangeLanguage(this).changeLanguage(langID)
+            Log.d("ContentActivity", "CONTENT " + Locale.getDefault().language)
+        }
+        else{
+            //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+            //ChangeLanguage(this).changeLanguage(langID)
+            Log.d("ContentActivity", "CONTENT " + Locale.getDefault().language)
+        }
+
+
         /**************/
 
         /*******Check Internet Connection********/
@@ -143,6 +152,9 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                     if (webView != null) {
                         if (request != null) {
                             webView.loadUrl(request.url.toString())
+                            //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                           // ChangeLanguage(context).changeLanguage("kk")
+                            Log.d("FIRST", "shouldOverrideUrlLoading " + Locale.getDefault().language)
                         }
                     }
                     return true
@@ -156,9 +168,6 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                     if(!loadingFinished){
                         redirect = true
                     }
-
-
-
 
                     loadingFinished = true
 
@@ -190,6 +199,10 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                 binding.loadingBlock.visibility = VISIBLE
                 binding.webView.visibility = INVISIBLE
                 binding.menuButton.visibility = INVISIBLE
+
+                //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+               // ChangeLanguage(context).changeLanguage("kk")
+                Log.d("FIRST", "onPageStarted " + Locale.getDefault().language)
             }
 
             override fun onPageFinished(view: WebView?, url: String?) {
@@ -199,6 +212,10 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
                     binding.loadingBlock.visibility = INVISIBLE
                     binding.webView.visibility = VISIBLE
                     binding.menuButton.visibility = VISIBLE
+
+                    //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+                    //ChangeLanguage(context).changeLanguage("kk")
+                    Log.d("FIRST", "onPageFinished " + Locale.getDefault().language)
                 }
                 else{
                     redirect = false
@@ -217,6 +234,8 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         when(academicID){
             0 -> {
                 binding.webView.loadUrl("https://bukharzhirau.tou.edu.kz/")
+                //langID = intent.getStringExtra(LANGUAGE_ID).toString()
+               // ChangeLanguage(this).changeLanguage(langID)
             }
             1 -> {
                 binding.webView.loadUrl("https://isa-baizakov.tou.edu.kz/")
@@ -282,7 +301,16 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
         /*****************Floating Button END******************************/
 
 
+
     }
+
+
+    /*override fun attachBaseContext(base: Context) {
+        LocaleHelper().setLocale(base, LocaleHelper().getLanguage(base))
+        super.attachBaseContext(LocaleHelper().onAttach(base))
+    }*/
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()
@@ -298,7 +326,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt(ID_ACADEMIC, academicID)
-        outState.putString(LANGUAGE_ID, langID)
+        //outState.putString(LANGUAGE_ID, langID)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -306,9 +334,9 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
             when (item.itemId) {
                 R.id.home_item -> {
                     val intent = Intent(this, MainActivity::class.java)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra(LANGUAGE_ID, langID)
-                    this.startActivity(intent)
+                    //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    //intent.putExtra(LANGUAGE_ID, langID)
+                    //this.startActivity(intent)
                     finish()
                 }
                 R.id.bukharzhirau_item -> {
@@ -414,6 +442,7 @@ class ContentActivity : AppCompatActivity(), NavigationView.OnNavigationItemSele
 
     override fun onDestroy() {
         binding.webView.clearCache(true)
+        binding.webView.removeAllViews()
         binding.webView.destroy()
         super.onDestroy()
     }

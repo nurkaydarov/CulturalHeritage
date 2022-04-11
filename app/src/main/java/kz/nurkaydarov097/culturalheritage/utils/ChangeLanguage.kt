@@ -18,7 +18,10 @@ class ChangeLanguage(private val context: Context) {
             config.locale = locale
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+        {
             context.createConfigurationContext(config)
+        }
+
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
     }
 
